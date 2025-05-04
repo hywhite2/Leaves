@@ -71,6 +71,13 @@ jobs:
         with:
           name: ${{ env.jar }}
           path: ${{ env.jar }}
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Test Results (${{ matrix.java }})
+          path: |
+            **
       - name: Create Release
         if: "!contains(github.event.commits[0].message, '[release-skip]')"
         continue-on-error: true
